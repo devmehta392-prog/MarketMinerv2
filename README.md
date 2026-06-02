@@ -1,6 +1,7 @@
 # MarketMiner
 
 A real-time commodity intelligence dashboard built with Streamlit. Tracks live prices, computes technical indicators, and provides an AI-powered chat assistant for market analysis — all in a single-page web app.
+<img width="1215" height="649" alt="image" src="https://github.com/user-attachments/assets/42d82cbc-dcd8-403d-b226-70205e2eb0ce" />
 
 ---
 
@@ -21,6 +22,7 @@ MarketMiner pulls live market data for 10 commodities and cryptocurrencies via Y
 - Sector performance bar chart, institutional allocation pie chart, and alpha correlation scatter plot
 - AI chat assistant powered by Google Gemini with auto-model discovery
 - Inline SVG sparklines in the sidebar for each asset
+<img width="1207" height="672" alt="image" src="https://github.com/user-attachments/assets/da9cd9c0-00d8-4a03-b03d-7989327c8353" />
 
 ---
 
@@ -78,6 +80,7 @@ The app is intentionally self-contained in a single file. Key sections within it
 - **Section 3** — Sidebar with live asset rows, sparklines, and Intelligence Score panel
 - **Section 4** — Main dashboard: ticker bar, candlestick chart, stats grid, analytics charts
 - **Section 5** — Gemini AI chat interface
+<img width="1188" height="683" alt="image" src="https://github.com/user-attachments/assets/d7b6f442-cdb9-4532-8c71-ec3ba7f07392" />
 
 ---
 
@@ -96,6 +99,9 @@ The app is intentionally self-contained in a single file. Key sections within it
 | ZC=F | Corn |
 | BTC-USD | Bitcoin |
 
+<img width="263" height="792" alt="image" src="https://github.com/user-attachments/assets/caa8ba4c-7b80-4139-bdcf-24ae9ffa91f6" />
+
+
 ---
 
 ## Notes
@@ -109,3 +115,5 @@ The app is intentionally self-contained in a single file. Key sections within it
 ## License
 
 MIT
+
+
