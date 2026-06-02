@@ -298,7 +298,7 @@ def render_live_sidebar():
                 btn_type = "primary" if is_active else "secondary"
                 if st.button(f"{details['name']}", key=f"nav_{sym}", type=btn_type):
                     st.session_state.target = sym
-                    st.rerun()
+                    st.rerun(scope="app")
 
     # Intelligence Score
     _, _, _, _, _, _, _, t_tech = get_stats(df_all, st.session_state.target)
