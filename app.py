@@ -90,12 +90,13 @@ st.markdown("""
     /* ── SIDEBAR SPARKLINE WRAPPER ── */
     .sb-spark { width: 60px; height: 30px; flex-shrink: 0; }
 
-    /* ── SIDEBAR BUTTONS (hidden, we use HTML rows) ── */
+    /* ── SIDEBAR BUTTONS ── */
     div[data-testid="stButton"] > button {
         text-align: left !important; justify-content: flex-start !important;
         padding: 0 !important; border-radius: 0px !important; width: 100%; transition: 0.2s;
         border: none !important; background: transparent !important;
-        height: 0 !important; overflow: hidden !important; position: absolute !important; opacity: 0 !important;
+        height: 100% !important; position: absolute !important; top: 0 !important; left: 0 !important;
+        opacity: 0 !important; cursor: pointer !important; z-index: 10 !important;
     }
 
     /* ── MAIN HEADER BAR ── */
@@ -281,6 +282,7 @@ def render_live_sidebar():
                         spark_svg = f'<svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" width="60" height="30"><polyline points="{" ".join(pts)}" fill="none" stroke="{color}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>'
 
                 st.markdown(f"""
+                <div style="position:relative;">
                 <div class="sb-asset-row {active_cls}">
                     <div class="sb-asset-icon">{details['icon']}</div>
                     <div class="sb-asset-info">
@@ -299,6 +301,8 @@ def render_live_sidebar():
                 if st.button(f"{details['name']}", key=f"nav_{sym}", type=btn_type):
                     st.session_state.target = sym
                     st.rerun(scope="app")
+
+                st.markdown("</div>", unsafe_allow_html=True)
 
     # Intelligence Score
     _, _, _, _, _, _, _, t_tech = get_stats(df_all, st.session_state.target)
