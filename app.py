@@ -19,67 +19,56 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
     :root {
-        --bg: #07080b;
-        --bg2: #0a0c10;
-        --card: #101218;
-        --card2: #151820;
-        --card3: #1c2029;
-        --border: #20242e;
-        --border-soft: #181922;
-        --hair: rgba(255,255,255,0.06);
+        --bg: #0a0b0e;
+        --card: #141519;          /* matches chart backgrounds exactly */
+        --card2: #1a1c22;
+        --card3: #22242b;
+        --border: #25272f;
+        --hair: rgba(255,255,255,0.055);
         --gold: #d4af6a;
-        --gold-bright: #e8c986;
-        --gold-deep: #b8945a;
+        --gold-bright: #eccb7e;
+        --gold-deep: #b89352;
         --gold-dim: rgba(212,175,106,0.10);
-        --text: #eef0f4;
-        --text2: #c4c8d0;
-        --dim: #6b7280;
-        --muted: #3a3f4b;
-        --green: #34d399;
-        --green-dim: rgba(52,211,153,0.12);
-        --red: #fb6f84;
-        --red-dim: rgba(251,111,132,0.12);
-        --blue: #5b9dff;
-        --violet: #a78bfa;
-        --shadow: 0 8px 40px rgba(0,0,0,0.55);
-        --shadow-soft: 0 4px 20px rgba(0,0,0,0.35);
-        --glow-gold: 0 0 32px rgba(212,175,106,0.18);
+        --text: #edeef1;
+        --text2: #b8bcc6;
+        --dim: #767b86;
+        --muted: #3c414c;
+        --green: #22c55e;
+        --green-dim: rgba(34,197,94,0.13);
+        --red: #ef4444;
+        --red-dim: rgba(239,68,68,0.13);
+        --blue: #3b82f6;
+        --shadow: 0 6px 28px rgba(0,0,0,0.45);
+        --shadow-soft: 0 2px 14px rgba(0,0,0,0.28);
     }
 
-    /* ── BASE / ATMOSPHERE ── */
-    header[data-testid="stHeader"] { background-color: transparent !important; height: 0 !important; }
-    .block-container { padding: 1.8rem 2rem 1rem 2rem !important; max-width: 100% !important; }
+    /* ── BASE ── */
+    header[data-testid="stHeader"] { background: transparent !important; height: 0 !important; }
+    .block-container { padding: 1.9rem 2rem 1rem 2rem !important; max-width: 100% !important; }
     [data-testid="stSidebarContent"] { padding: 0 !important; background: var(--card) !important; border-right: 1px solid var(--hair); }
     [data-testid="stSidebar"] { background: var(--card) !important; }
-
     html, body, [data-testid="stAppViewContainer"] {
         background:
-            radial-gradient(1400px 700px at 85% -15%, rgba(91,157,255,0.05), transparent 55%),
-            radial-gradient(1100px 600px at -5% 5%, rgba(212,175,106,0.045), transparent 50%),
-            linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+            radial-gradient(1200px 700px at 88% -12%, rgba(59,130,246,0.04), transparent 55%),
+            radial-gradient(1000px 600px at -5% 3%, rgba(212,175,106,0.035), transparent 52%),
+            var(--bg);
         color: var(--text);
         font-family: 'Manrope', sans-serif;
         -webkit-font-smoothing: antialiased;
-        letter-spacing: -0.012em;
+        letter-spacing: -0.011em;
     }
-    /* subtle film grain overlay for depth */
-    [data-testid="stAppViewContainer"]::before {
-        content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.025;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
     .mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "tnum"; }
 
-    /* Custom Scrollbar */
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #262a35; border-radius: 6px; }
+    ::-webkit-scrollbar-thumb { background: #2a2d36; border-radius: 6px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
 
     /* ── TICKER BAR ── */
-    .ticker-bar { background: linear-gradient(180deg, #0b0d12, #070809); border-bottom: 1px solid var(--hair); padding: 9px 0; overflow: hidden; white-space: nowrap; margin: -1.8rem -2rem 20px -2rem; position: relative; }
-    .ticker-bar::after { content: ""; position: absolute; top: 0; right: 0; width: 80px; height: 100%; background: linear-gradient(90deg, transparent, #070809); pointer-events: none; }
-    .ticker-track { display: inline-flex; animation: scroll 50s linear infinite; }
+    .ticker-bar { background: #0c0d11; border-bottom: 1px solid var(--hair); padding: 9px 0; overflow: hidden; white-space: nowrap; margin: -1.9rem -2rem 20px -2rem; position: relative; }
+    .ticker-bar::after { content: ""; position: absolute; top: 0; right: 0; width: 90px; height: 100%; background: linear-gradient(90deg, transparent, #0c0d11); pointer-events: none; }
+    .ticker-track { display: inline-flex; animation: scroll 48s linear infinite; }
     .ticker-track:hover { animation-play-state: paused; }
     .t-item { display: inline-flex; align-items: center; gap: 7px; padding: 0 24px; font-size: 12px; border-right: 1px solid var(--hair); }
     .t-item .t-name { color: var(--dim); font-weight: 600; }
@@ -90,38 +79,36 @@ st.markdown("""
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ── SIDEBAR BRANDING ── */
-    .sb-top { padding: 22px 20px 20px 20px; border-bottom: 1px solid var(--hair); background: linear-gradient(180deg, rgba(212,175,106,0.04), transparent); position: relative; }
-    .sb-top::after { content: ""; position: absolute; left: 20px; right: 20px; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); }
+    .sb-top { padding: 22px 20px 20px 20px; border-bottom: 1px solid var(--hair); }
     .logo { display: flex; align-items: center; gap: 13px; }
-    .logo-mark { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)); border-radius: 12px; display: grid; place-items: center; font-size: 21px; color: #1a1300; font-weight: 800; box-shadow: var(--glow-gold), inset 0 1px 0 rgba(255,255,255,0.3); }
+    .logo-mark { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)); border-radius: 12px; display: grid; place-items: center; font-size: 21px; color: #1a1300; font-weight: 800; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 4px 14px rgba(212,175,106,0.18); }
     .logo-name { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.6px; line-height: 1.05; }
-    .logo-name span { background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .logo-sub { font-size: 9.5px; color: var(--dim); margin-top: 3px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+    .logo-name span { color: var(--gold); }
+    .logo-sub { font-size: 9px; color: var(--dim); margin-top: 3px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 600; }
     .sb-label { padding: 18px 20px 8px; font-size: 9px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.8px; }
 
     /* ── SIDEBAR ASSET ROWS ── */
     .sb-asset-row {
         display: flex; align-items: center; padding: 11px 14px; cursor: pointer;
-        border: 1px solid transparent; transition: all 0.2s cubic-bezier(0.4,0,0.2,1); gap: 11px;
+        border: 1px solid transparent; transition: all 0.18s cubic-bezier(0.4,0,0.2,1); gap: 11px;
         margin: 2px 10px; border-radius: 11px; position: relative;
     }
     .sb-asset-row:hover { background: var(--card2); border-color: var(--hair); }
     .sb-asset-row.active {
-        background: linear-gradient(100deg, rgba(212,175,106,0.12), rgba(212,175,106,0.02));
-        border-color: rgba(212,175,106,0.30);
-        box-shadow: inset 0 0 0 1px rgba(212,175,106,0.08), 0 4px 16px rgba(0,0,0,0.3);
+        background: linear-gradient(100deg, rgba(212,175,106,0.11), rgba(212,175,106,0.015));
+        border-color: rgba(212,175,106,0.28);
     }
-    .sb-asset-row.active::before { content: ""; position: absolute; left: -1px; top: 22%; bottom: 22%; width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep)); }
+    .sb-asset-row.active::before { content: ""; position: absolute; left: -1px; top: 24%; bottom: 24%; width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep)); }
     .sb-asset-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
     .sb-asset-info { flex: 1; min-width: 0; }
     .sb-asset-name { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
-    .sb-asset-ticker { font-size: 9.5px; color: var(--dim); letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
+    .sb-asset-ticker { font-size: 9.5px; color: var(--dim); letter-spacing: 0.4px; font-family: 'JetBrains Mono', monospace; }
     .sb-asset-right { text-align: right; flex-shrink: 0; }
     .sb-asset-price { font-size: 12.5px; font-weight: 600; color: var(--text); font-family: 'JetBrains Mono', monospace; }
     .sb-asset-chg { font-size: 10.5px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
     .sb-asset-chg.up { color: var(--green); }
     .sb-asset-chg.dn { color: var(--red); }
-    .sb-spark { width: 58px; height: 30px; flex-shrink: 0; opacity: 0.85; }
+    .sb-spark { width: 58px; height: 30px; flex-shrink: 0; opacity: 0.9; }
 
     /* ── SIDEBAR BUTTONS (overlay click targets) ── */
     div[data-testid="stButton"] > button {
@@ -134,41 +121,38 @@ st.markdown("""
         text-transform: uppercase !important;
         padding: 6px 8px !important; border-radius: 8px !important;
         margin: 0 10px 7px 10px !important;
-        transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+        transition: all 0.18s cubic-bezier(0.4,0,0.2,1);
     }
     div[data-testid="stButton"] > button:hover {
-        border-color: var(--gold) !important; color: var(--gold-bright) !important;
-        background: var(--gold-dim) !important; box-shadow: 0 0 16px rgba(212,175,106,0.12);
+        border-color: var(--gold) !important; color: var(--gold-bright) !important; background: var(--gold-dim) !important;
     }
     div[data-testid="stButton"] > button[kind="primary"] {
-        background: linear-gradient(135deg, rgba(212,175,106,0.20), rgba(212,175,106,0.05)) !important;
-        border-color: rgba(212,175,106,0.45) !important; color: var(--gold-bright) !important;
+        background: linear-gradient(135deg, rgba(212,175,106,0.18), rgba(212,175,106,0.04)) !important;
+        border-color: rgba(212,175,106,0.42) !important; color: var(--gold-bright) !important;
     }
 
-    /* ── MAIN HEADER BAR (glass) ── */
+    /* ── MAIN HEADER BAR ── */
     .ch-head {
-        padding: 18px 24px; border: 1px solid var(--hair); border-radius: 16px 16px 0 0;
-        display: flex; align-items: center; gap: 15px;
-        background: linear-gradient(135deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
-        backdrop-filter: blur(20px); margin-bottom: 0; flex-wrap: wrap;
-        box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
+        padding: 17px 24px; border: 1px solid var(--border); border-radius: 14px 14px 0 0;
+        display: flex; align-items: center; gap: 15px; background: var(--card); margin-bottom: 0; flex-wrap: wrap;
+        position: relative;
     }
-    .ch-head::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,106,0.4), transparent); }
-    .ch-icon { font-size: 30px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
-    .ch-name { font-size: 23px; font-weight: 800; color: var(--text); letter-spacing: -0.8px; }
-    .ch-ticker { font-size: 10.5px; color: var(--gold); background: var(--gold-dim); padding: 4px 10px; border-radius: 7px; border: 1px solid rgba(212,175,106,0.25); font-weight: 600; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
-    .ch-price { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace; letter-spacing: -1.5px; }
+    .ch-head::before { content: ""; position: absolute; top: 0; left: 18px; right: 18px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,106,0.35), transparent); }
+    .ch-icon { font-size: 29px; }
+    .ch-name { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.7px; }
+    .ch-ticker { font-size: 10.5px; color: var(--gold); background: var(--gold-dim); padding: 4px 10px; border-radius: 7px; border: 1px solid rgba(212,175,106,0.22); font-weight: 600; letter-spacing: 0.4px; font-family: 'JetBrains Mono', monospace; }
+    .ch-price { font-size: 31px; font-weight: 700; font-family: 'JetBrains Mono', monospace; letter-spacing: -1.4px; }
     .ch-chg { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; }
     .ch-chg.up { color: var(--green); background: var(--green-dim); }
     .ch-chg.dn { color: var(--red); background: var(--red-dim); }
-    .demo-badge { background: var(--green-dim); color: var(--green); padding: 5px 11px; border-radius: 7px; font-size: 9.5px; font-weight: 700; border: 1px solid rgba(52,211,153,0.25); letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px; }
-    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(52,211,153,0.7); animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); } 70% { box-shadow: 0 0 0 7px rgba(52,211,153,0); } 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); } }
+    .demo-badge { background: var(--green-dim); color: var(--green); padding: 5px 11px; border-radius: 7px; font-size: 9.5px; font-weight: 700; border: 1px solid rgba(34,197,94,0.22); letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px; }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); } 70% { box-shadow: 0 0 0 7px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
 
     /* ── OHLC BAR ── */
     .ohlc-bar {
-        background: rgba(255,255,255,0.012); border: 1px solid var(--hair); border-top: none;
-        display: flex; align-items: center; padding: 11px 24px; gap: 0; flex-wrap: wrap; backdrop-filter: blur(10px);
+        background: var(--card); border: 1px solid var(--border); border-top: none;
+        display: flex; align-items: center; padding: 11px 24px; gap: 0; flex-wrap: wrap;
     }
     .ohlc-item { display: flex; align-items: center; gap: 7px; padding: 0 20px 0 0; border-right: 1px solid var(--hair); margin-right: 20px; }
     .ohlc-item:last-child { border-right: none; margin-right: 0; }
@@ -179,26 +163,22 @@ st.markdown("""
 
     /* ── SUMMARY STRIP ── */
     .summary {
-        background: linear-gradient(100deg, rgba(212,175,106,0.05), transparent 65%);
-        border: 1px solid var(--hair); border-top: none; border-radius: 0 0 16px 16px;
+        background: var(--card); border: 1px solid var(--border); border-top: none; border-radius: 0 0 14px 14px;
         padding: 13px 24px; font-size: 12.5px; line-height: 1.8; color: var(--text2); margin-bottom: 0;
-        box-shadow: var(--shadow-soft);
+        border-left: 2px solid var(--gold);
     }
     .summary strong { color: var(--text); font-weight: 700; }
-    .summary .mono { color: var(--text); }
 
     /* ── STATS GRID ── */
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 20px 0 24px 0; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; margin: 20px 0 24px 0; }
     .stat {
-        background: linear-gradient(160deg, rgba(255,255,255,0.025), rgba(255,255,255,0.004));
-        padding: 18px 20px; border-radius: 15px; border: 1px solid var(--hair);
-        display: flex; flex-direction: column; gap: 2px; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); cursor: default;
-        box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
+        background: var(--card); padding: 17px 19px; border-radius: 14px; border: 1px solid var(--border);
+        display: flex; flex-direction: column; gap: 2px; transition: all 0.2s cubic-bezier(0.4,0,0.2,1); cursor: default;
+        position: relative;
     }
-    .stat::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--hair), transparent); }
-    .stat:hover { border-color: rgba(212,175,106,0.30); transform: translateY(-4px); box-shadow: var(--shadow), var(--glow-gold); }
-    .stat-lbl { font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.4px; font-weight: 700; margin-bottom: 9px; }
-    .stat-val { font-size: 22px; font-weight: 700; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.8px; }
+    .stat:hover { border-color: rgba(212,175,106,0.28); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .stat-lbl { font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.3px; font-weight: 700; margin-bottom: 9px; }
+    .stat-val { font-size: 21px; font-weight: 700; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.7px; }
     .stat-sub { font-size: 10px; color: var(--dim); margin-top: 7px; display: flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', monospace; }
     .badge { display: inline-block; font-size: 8.5px; padding: 3px 8px; border-radius: 5px; font-weight: 700; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
     .badge.r { background: var(--red-dim); color: var(--red); }
@@ -206,26 +186,24 @@ st.markdown("""
     .badge.y { background: var(--gold-dim); color: var(--gold); }
 
     /* ── CHART AREA ── */
-    .chart-wrap { background: transparent; padding: 0; }
+    .chart-wrap { background: var(--card); border: 1px solid var(--border); border-top: none; padding: 0; }
     .chart-box {
-        background: linear-gradient(160deg, rgba(255,255,255,0.022), rgba(255,255,255,0.004));
-        border: 1px solid var(--hair); border-radius: 15px; padding: 12px; box-shadow: var(--shadow-soft);
-        transition: border-color 0.25s; position: relative; overflow: hidden;
+        background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 10px;
+        transition: border-color 0.2s;
     }
-    .chart-box::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--hair), transparent); }
-    .chart-box:hover { border-color: rgba(212,175,106,0.22); }
+    .chart-box:hover { border-color: rgba(212,175,106,0.2); }
 
     /* ── SECTION DIVIDER ── */
-    .section-head { font-size: 10.5px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 12px 0 16px 0; display: flex; align-items: center; gap: 12px; }
-    .section-head::before { content: ""; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold); }
+    .section-head { font-size: 10.5px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 1.8px; margin: 12px 0 16px 0; display: flex; align-items: center; gap: 11px; }
+    .section-head::before { content: ""; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 7px var(--gold); }
     .section-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--hair), transparent); }
 
     /* ── CHAT UI ── */
-    [data-testid="stChatMessage"] { background: linear-gradient(160deg, rgba(255,255,255,0.022), rgba(255,255,255,0.004)) !important; border: 1px solid var(--hair); border-radius: 14px; margin-bottom: 11px; padding: 16px !important; box-shadow: var(--shadow-soft); }
+    [data-testid="stChatMessage"] { background: var(--card) !important; border: 1px solid var(--border); border-radius: 13px; margin-bottom: 11px; padding: 16px !important; }
     [data-testid="chatAvatarIcon-user"] { background: var(--card3) !important; color: var(--text) !important; }
     [data-testid="chatAvatarIcon-assistant"] { background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)) !important; color: #000 !important; }
-    [data-testid="stChatInput"] { background: var(--card) !important; border-color: var(--hair) !important; border-radius: 14px !important; }
-    [data-testid="stChatInput"]:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold), var(--glow-gold) !important; }
+    [data-testid="stChatInput"] { background: var(--card) !important; border-color: var(--border) !important; border-radius: 13px !important; }
+    [data-testid="stChatInput"]:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold) !important; }
     [data-testid="stChatInput"] textarea { font-family: 'Manrope', sans-serif !important; }
     </style>
     """, unsafe_allow_html=True)
@@ -475,41 +453,27 @@ def render_live_main():
 
     # 3. Dynamic Candlestick Chart (with Rangebreaks to hide weekends)
     if not df.empty:
-        # Soft area glow beneath the close price for depth (visual only)
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(
-            x=df.index, y=df['Close'], mode='lines',
-            line=dict(color='rgba(212,175,106,0)', width=0),
-            fill='tozeroy', fillcolor='rgba(212,175,106,0.05)',
-            hoverinfo='skip', showlegend=False
-        ))
-        fig.add_trace(go.Candlestick(
+        fig = go.Figure(data=[go.Candlestick(
             x=df.index, open=df['Open'], high=df['High'], low=df['Low'], close=df['Close'],
-            increasing_line_color='#34d399', decreasing_line_color='#fb6f84',
-            increasing_fillcolor='rgba(52,211,153,0.85)', decreasing_fillcolor='rgba(251,111,132,0.85)',
-            line=dict(width=1), name='Price'
-        ))
+            increasing_line_color='#26a69a', decreasing_line_color='#ef5350'
+        )])
         ma20_line = df['Close'].rolling(window=20).mean()
-        fig.add_trace(go.Scatter(x=df.index, y=ma20_line, line=dict(color='#d4af6a', width=1.6, dash='dot'), name='MA 20'))
+        fig.add_trace(go.Scatter(x=df.index, y=ma20_line, line=dict(color='#FFD700', width=1.5, dash='dot'), name='MA20'))
 
         fig.update_layout(
-            template="plotly_dark", height=440, margin=dict(t=16, b=14, l=14, r=56),
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(family='JetBrains Mono, monospace', size=10, color='#6b7280'),
+            template="plotly_dark", height=420, margin=dict(t=10, b=10, l=10, r=50),
+            paper_bgcolor='#141519', plot_bgcolor='#141519',
             xaxis=dict(
-                showgrid=False, rangeslider_visible=False,
+                showgrid=False,
+                rangeslider_visible=False,
                 rangebreaks=[dict(bounds=["sat", "mon"])],
-                color='#6b7280', showspikes=True, spikecolor='rgba(212,175,106,0.3)',
-                spikethickness=1, spikedash='dot', spikemode='across'
+                color='#6b7280'
             ),
-            yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.04)', side="right",
-                       color='#6b7280', zeroline=False),
-            showlegend=True, hovermode='x unified',
+            yaxis=dict(showgrid=True, gridcolor='#1c1d23', side="right", color='#6b7280'),
+            showlegend=True,
             legend=dict(x=0.01, y=0.99, bgcolor='rgba(0,0,0,0)', font=dict(color='#6b7280', size=10))
         )
-        st.markdown("<div class='chart-box' style='border-radius:0 0 16px 16px;border-top:none;'>", unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-        st.markdown("</div>", unsafe_allow_html=True)
 
     # 4. Summary & Perfectly Aligned Stats Grid
     trend = "bullish uptrend" if pct >= 0 else "bearish downtrend"
@@ -573,16 +537,16 @@ def render_live_main():
     # 5. Bottom 3 Analytical Charts
     st.markdown("<div class='section-head' style='margin-top:24px;'>Market Analytics &amp; Models</div>", unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    chart_layout = dict(template="plotly_dark", height=250, margin=dict(t=40, b=15, l=10, r=10), paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', title_font=dict(size=12, color="#c4c8d0", family='Manrope, sans-serif'), font=dict(color='#6b7280', family='JetBrains Mono, monospace', size=10))
+    chart_layout = dict(template="plotly_dark", height=250, margin=dict(t=35, b=15, l=10, r=10), paper_bgcolor='#141519', plot_bgcolor='#141519', title_font=dict(size=12, color="#6b7280"), font=dict(color='#6b7280'))
 
     with c1:
         st.markdown("<div class='chart-box'>", unsafe_allow_html=True)
         assets = ['Metals', 'Energy', 'Agri', 'Equities', 'Crypto']
         perfs = [0.8, -0.4, 1.2, 0.5, 2.1] 
-        colors = ['#34d399' if p > 0 else '#fb6f84' for p in perfs]
-        fig_bar = go.Figure(data=[go.Bar(x=assets, y=perfs, marker_color=colors, marker_line_width=0)])
-        fig_bar.update_layout(**chart_layout, title="Sector Performance Model")
-        fig_bar.update_yaxes(showgrid=True, gridcolor='rgba(255,255,255,0.04)', zeroline=False)
+        colors = ['#22c55e' if p > 0 else '#ef4444' for p in perfs]
+        fig_bar = go.Figure(data=[go.Bar(x=assets, y=perfs, marker_color=colors)])
+        fig_bar.update_layout(**chart_layout, title="📊 Sector Performance Model")
+        fig_bar.update_yaxes(showgrid=True, gridcolor='#1c1d23')
         st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -590,9 +554,9 @@ def render_live_main():
         st.markdown("<div class='chart-box'>", unsafe_allow_html=True)
         labels = ['Equities', 'Bonds', 'Gold', 'Cash']
         values = [60, 20, 10, 10]
-        fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.62, marker=dict(colors=['#5b9dff', '#a78bfa', '#d4af6a', '#34d399'], line=dict(color='#07080b', width=2)))])
-        fig_pie.update_layout(**chart_layout, title="Institutional Allocation", showlegend=False)
-        fig_pie.update_traces(textposition='inside', textinfo='percent+label', textfont=dict(size=10, family='JetBrains Mono, monospace'))
+        fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.5, marker=dict(colors=['#3b82f6', '#8b5cf6', '#FFD700', '#22c55e']))])
+        fig_pie.update_layout(**chart_layout, title="🥧 Institutional Allocation", showlegend=False)
+        fig_pie.update_traces(textposition='inside', textinfo='percent+label')
         st.plotly_chart(fig_pie, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -601,10 +565,10 @@ def render_live_main():
         np.random.seed(42)
         x_val = np.random.normal(0.05, 0.02, 50)
         y_val = x_val * 0.7 + np.random.normal(0, 0.015, 50)
-        fig_scatter = go.Figure(data=go.Scatter(x=x_val, y=y_val, mode='markers', marker=dict(color='#5b9dff', size=8, opacity=0.7, line=dict(color='#07080b', width=1))))
-        fig_scatter.update_layout(**chart_layout, title="Alpha Correlation vs SPY", xaxis_title="S&P 500", yaxis_title=f"{sym}")
-        fig_scatter.update_xaxes(showgrid=True, gridcolor='rgba(255,255,255,0.04)', zeroline=False)
-        fig_scatter.update_yaxes(showgrid=True, gridcolor='rgba(255,255,255,0.04)', zeroline=False)
+        fig_scatter = go.Figure(data=go.Scatter(x=x_val, y=y_val, mode='markers', marker=dict(color='#3b82f6', size=7, opacity=0.8)))
+        fig_scatter.update_layout(**chart_layout, title=f"📈 Alpha Correlation vs SPY", xaxis_title="S&P 500", yaxis_title=f"{sym}")
+        fig_scatter.update_xaxes(showgrid=True, gridcolor='#1c1d23')
+        fig_scatter.update_yaxes(showgrid=True, gridcolor='#1c1d23')
         st.plotly_chart(fig_scatter, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
