@@ -90,12 +90,26 @@ st.markdown("""
     /* ── SIDEBAR SPARKLINE WRAPPER ── */
     .sb-spark { width: 60px; height: 30px; flex-shrink: 0; }
 
-    /* ── SIDEBAR BUTTONS (hidden, we use HTML rows) ── */
+    /* ── SIDEBAR BUTTONS ── */
     div[data-testid="stButton"] > button {
-        text-align: left !important; justify-content: flex-start !important;
-        padding: 0 !important; border-radius: 0px !important; width: 100%; transition: 0.2s;
-        border: none !important; background: transparent !important;
-        height: 0 !important; overflow: hidden !important; position: absolute !important; opacity: 0 !important;
+        width: 100%;
+        background: var(--card2) !important;
+        border: 1px solid var(--border) !important;
+        color: var(--dim) !important;
+        font-size: 11px !important;
+        padding: 4px 8px !important;
+        border-radius: 6px !important;
+        margin: -4px 0 8px 0 !important;
+        transition: 0.15s;
+    }
+    div[data-testid="stButton"] > button:hover {
+        border-color: var(--gold) !important;
+        color: var(--gold) !important;
+    }
+    div[data-testid="stButton"] > button[kind="primary"] {
+        background: var(--gold-dim) !important;
+        border-color: var(--gold) !important;
+        color: var(--gold) !important;
     }
 
     /* ── MAIN HEADER BAR ── */
@@ -279,8 +293,9 @@ def render_live_sidebar():
                         color = "#22c55e" if pct >= 0 else "#ef4444"
                         spark_svg = f'<svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" width="60" height="30"><polyline points="{" ".join(pts)}" fill="none" stroke="{color}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>'
 
+                # Render the visual row
                 st.markdown(f"""
-                <div class="sb-asset-row {active_cls}">
+                <div class="sb-asset-row {active_cls}" id="row_{sym}">
                     <div class="sb-asset-icon">{details['icon']}</div>
                     <div class="sb-asset-info">
                         <div class="sb-asset-name">{details['name']}</div>
@@ -294,10 +309,11 @@ def render_live_sidebar():
                 </div>
                 """, unsafe_allow_html=True)
 
+                # Real, visible navigation button directly under the row
                 btn_type = "primary" if is_active else "secondary"
-                if st.button(f"{details['name']}", key=f"nav_{sym}", type=btn_type):
+                if st.button(f"View {details['name']}", key=f"nav_{sym}", type=btn_type, use_container_width=True):
                     st.session_state.target = sym
-                    st.rerun(scope="app")
+                    st.rerun()
 
     # Intelligence Score
     _, _, _, _, _, _, _, t_tech = get_stats(df_all, st.session_state.target)
