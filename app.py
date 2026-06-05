@@ -19,30 +19,41 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
     :root {
-        --bg: #0b0c0f;
-        --card: #141519;
-        --card2: #1c1d23;
-        --card3: #22232b;
-        --border: #252630;
-        --gold: #FFD700;
-        --gold-dim: rgba(255,215,0,0.10);
-        --text: #ffffff;
-        --dim: #6b7280;
-        --muted: #374151;
-        --green: #22c55e;
-        --green-dim: rgba(34,197,94,0.12);
-        --red: #ef4444;
-        --red-dim: rgba(239,68,68,0.12);
-        --blue: #3b82f6;
+        --bg: #08090c;
+        --card: #121318;
+        --card2: #181a20;
+        --card3: #20222a;
+        --border: #23252f;
+        --border-soft: #1b1d25;
+        --gold: #f5c542;
+        --gold-bright: #FFD700;
+        --gold-dim: rgba(245,197,66,0.10);
+        --text: #f4f5f7;
+        --dim: #717784;
+        --muted: #3a3f4b;
+        --green: #2dd4a7;
+        --green-dim: rgba(45,212,167,0.12);
+        --red: #f0556d;
+        --red-dim: rgba(240,85,109,0.12);
+        --blue: #4f8cff;
         --teal: #14b8a6;
+        --shadow: 0 4px 24px rgba(0,0,0,0.40);
+        --shadow-soft: 0 2px 12px rgba(0,0,0,0.25);
     }
 
     /* Header */
     header[data-testid="stHeader"] { background-color: transparent !important; }
-    .block-container { padding: 3rem 1.5rem 1rem 1.5rem !important; max-width: 100% !important; }
-    [data-testid="stSidebarContent"] { padding: 0 !important; background-color: var(--card) !important; }
+    .block-container { padding: 2.4rem 1.6rem 1rem 1.6rem !important; max-width: 100% !important; }
+    [data-testid="stSidebarContent"] { padding: 0 !important; background-color: var(--card) !important; border-right: 1px solid var(--border-soft); }
     html, body, [data-testid="stAppViewContainer"] {
-        background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif;
+        background:
+            radial-gradient(1200px 600px at 80% -10%, rgba(79,140,255,0.04), transparent 60%),
+            radial-gradient(1000px 500px at 0% 0%, rgba(245,197,66,0.03), transparent 55%),
+            var(--bg);
+        color: var(--text);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        letter-spacing: -0.01em;
     }
 
     /* Custom Scrollbar */
@@ -63,27 +74,29 @@ st.markdown("""
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ── SIDEBAR BRANDING ── */
-    .sb-top { padding: 18px 16px 16px 16px; border-bottom: 1px solid var(--border); background: var(--card); }
-    .logo { display: flex; align-items: center; gap: 10px; }
-    .logo-mark { width: 34px; height: 34px; background: var(--gold); border-radius: 8px; display: grid; place-items: center; font-size: 18px; color: black; font-weight: bold; }
-    .logo-name { font-size: 17px; font-weight: 800; color: var(--gold); letter-spacing: -0.5px; line-height: 1.1; }
-    .logo-sub { font-size: 10px; color: var(--dim); margin-top: 1px; }
-    .sb-label { padding: 14px 16px 6px; font-size: 9.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; }
+    .sb-top { padding: 20px 18px 18px 18px; border-bottom: 1px solid var(--border-soft); background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%); }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-mark { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%); border-radius: 10px; display: grid; place-items: center; font-size: 19px; color: #1a1500; font-weight: bold; box-shadow: 0 2px 10px rgba(245,197,66,0.25); }
+    .logo-name { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; line-height: 1.1; }
+    .logo-name span { color: var(--gold); }
+    .logo-sub { font-size: 10px; color: var(--dim); margin-top: 2px; letter-spacing: 0.2px; }
+    .sb-label { padding: 16px 18px 7px; font-size: 9.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.4px; }
 
     /* ── SIDEBAR ASSET ROWS ── */
     .sb-asset-row {
-        display: flex; align-items: center; padding: 10px 16px; cursor: pointer;
-        border-left: 3px solid transparent; transition: all 0.15s; gap: 10px;
+        display: flex; align-items: center; padding: 11px 16px; cursor: pointer;
+        border-left: 3px solid transparent; transition: all 0.18s cubic-bezier(0.4,0,0.2,1); gap: 10px;
+        margin: 1px 8px; border-radius: 9px;
     }
     .sb-asset-row:hover { background: var(--card2); }
-    .sb-asset-row.active { background: rgba(255,215,0,0.06); border-left-color: var(--gold); }
+    .sb-asset-row.active { background: linear-gradient(90deg, rgba(245,197,66,0.10), rgba(245,197,66,0.02)); border-left-color: var(--gold); box-shadow: inset 0 0 0 1px rgba(245,197,66,0.10); }
     .sb-asset-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
     .sb-asset-info { flex: 1; min-width: 0; }
-    .sb-asset-name { font-size: 13px; font-weight: 600; color: #fff; }
-    .sb-asset-ticker { font-size: 10px; color: var(--dim); }
+    .sb-asset-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .sb-asset-ticker { font-size: 10px; color: var(--dim); letter-spacing: 0.3px; }
     .sb-asset-right { text-align: right; flex-shrink: 0; }
-    .sb-asset-price { font-size: 13px; font-weight: 700; color: #fff; }
-    .sb-asset-chg { font-size: 11px; font-weight: 600; }
+    .sb-asset-price { font-size: 13px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+    .sb-asset-chg { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
     .sb-asset-chg.up { color: var(--green); }
     .sb-asset-chg.dn { color: var(--red); }
 
@@ -93,85 +106,93 @@ st.markdown("""
     /* ── SIDEBAR BUTTONS ── */
     div[data-testid="stButton"] > button {
         width: 100%;
-        background: var(--card2) !important;
+        background: transparent !important;
         border: 1px solid var(--border) !important;
         color: var(--dim) !important;
-        font-size: 11px !important;
-        padding: 4px 8px !important;
-        border-radius: 6px !important;
-        margin: -4px 0 8px 0 !important;
-        transition: 0.15s;
+        font-size: 10.5px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.3px !important;
+        padding: 5px 8px !important;
+        border-radius: 7px !important;
+        margin: -2px 8px 6px 8px !important;
+        width: calc(100% - 16px) !important;
+        transition: all 0.18s cubic-bezier(0.4,0,0.2,1);
     }
     div[data-testid="stButton"] > button:hover {
         border-color: var(--gold) !important;
         color: var(--gold) !important;
+        background: var(--gold-dim) !important;
     }
     div[data-testid="stButton"] > button[kind="primary"] {
-        background: var(--gold-dim) !important;
+        background: linear-gradient(135deg, rgba(245,197,66,0.18), rgba(245,197,66,0.06)) !important;
         border-color: var(--gold) !important;
         color: var(--gold) !important;
     }
 
     /* ── MAIN HEADER BAR ── */
     .ch-head {
-        padding: 14px 20px; border: 1px solid var(--border); border-radius: 10px 10px 0 0;
-        display: flex; align-items: center; gap: 14px; background: var(--card); margin-bottom: 0px;
-        flex-wrap: wrap;
+        padding: 16px 22px; border: 1px solid var(--border); border-radius: 14px 14px 0 0;
+        display: flex; align-items: center; gap: 14px;
+        background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%); margin-bottom: 0px;
+        flex-wrap: wrap; box-shadow: var(--shadow-soft);
     }
-    .ch-icon { font-size: 26px; }
-    .ch-name { font-size: 20px; font-weight: 800; color: #fff; }
-    .ch-ticker { font-size: 11px; color: var(--dim); background: var(--card2); padding: 3px 8px; border-radius: 5px; border: 1px solid var(--border); font-weight: 600; }
-    .ch-price { font-size: 28px; font-weight: 800; }
-    .ch-chg { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 5px; }
+    .ch-icon { font-size: 28px; }
+    .ch-name { font-size: 21px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+    .ch-ticker { font-size: 11px; color: var(--dim); background: var(--card3); padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border); font-weight: 600; letter-spacing: 0.3px; }
+    .ch-price { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
+    .ch-chg { font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 7px; font-variant-numeric: tabular-nums; }
     .ch-chg.up { color: var(--green); background: var(--green-dim); }
     .ch-chg.dn { color: var(--red); background: var(--red-dim); }
-    .demo-badge { background: var(--gold-dim); color: var(--gold); padding: 3px 9px; border-radius: 5px; font-size: 10px; font-weight: 700; border: 1px solid rgba(255,215,0,.25); }
+    .demo-badge { background: var(--gold-dim); color: var(--gold); padding: 4px 10px; border-radius: 6px; font-size: 9.5px; font-weight: 700; border: 1px solid rgba(245,197,66,.25); letter-spacing: 0.5px; }
 
     /* ── OHLC BAR (below header) ── */
     .ohlc-bar {
-        background: var(--card2); border: 1px solid var(--border); border-top: none;
-        display: flex; align-items: center; padding: 8px 20px; gap: 0; flex-wrap: wrap;
+        background: var(--card); border: 1px solid var(--border); border-top: none;
+        display: flex; align-items: center; padding: 9px 22px; gap: 0; flex-wrap: wrap;
     }
-    .ohlc-item { display: flex; align-items: center; gap: 5px; padding: 0 18px 0 0; border-right: 1px solid var(--border); margin-right: 18px; }
+    .ohlc-item { display: flex; align-items: center; gap: 6px; padding: 0 18px 0 0; border-right: 1px solid var(--border-soft); margin-right: 18px; }
     .ohlc-item:last-child { border-right: none; margin-right: 0; }
-    .ohlc-lbl { font-size: 10px; color: var(--dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-    .ohlc-val { font-size: 12px; font-weight: 700; color: #fff; }
+    .ohlc-lbl { font-size: 9.5px; color: var(--dim); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+    .ohlc-val { font-size: 12px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
     .ohlc-val.hi { color: var(--green); }
     .ohlc-val.lo { color: var(--red); }
 
     /* ── SUMMARY STRIP ── */
     .summary {
-        background: linear-gradient(90deg, rgba(255,215,0,0.07) 0%, transparent 100%);
-        border-left: 3px solid var(--gold); border-radius: 0 0 0 0;
-        border: 1px solid var(--border); border-top: none; border-bottom: none;
-        padding: 11px 20px; font-size: 12.5px; line-height: 1.7; color: #9ca3af; margin-bottom: 0;
+        background: linear-gradient(90deg, rgba(245,197,66,0.06) 0%, transparent 70%);
+        border: 1px solid var(--border); border-top: none; border-radius: 0 0 14px 14px;
+        padding: 12px 22px; font-size: 12.5px; line-height: 1.75; color: #9ca3af; margin-bottom: 0;
+        box-shadow: var(--shadow-soft);
     }
-    .summary strong { color: #fff; }
+    .summary strong { color: var(--text); }
 
     /* ── STATS GRID ── */
     .stats {
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0 20px 0;
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 22px 0;
     }
     .stat {
-        background: var(--card); padding: 16px 18px; border-radius: 10px; border: 1px solid var(--border);
-        display: flex; flex-direction: column; gap: 2px; transition: all 0.2s; cursor: default;
+        background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%);
+        padding: 17px 19px; border-radius: 13px; border: 1px solid var(--border);
+        display: flex; flex-direction: column; gap: 2px; transition: all 0.22s cubic-bezier(0.4,0,0.2,1); cursor: default;
+        box-shadow: var(--shadow-soft);
     }
-    .stat:hover { border-color: #3a3b47; background: var(--card2); transform: translateY(-2px); }
-    .stat-lbl { font-size: 9.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.1px; font-weight: 700; margin-bottom: 6px; }
-    .stat-val { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .stat-sub { font-size: 10px; color: var(--dim); margin-top: 5px; display: flex; align-items: center; gap: 5px; }
-    .badge { display: inline-block; font-size: 9px; padding: 2px 7px; border-radius: 4px; font-weight: 700; letter-spacing: 0.3px; }
+    .stat:hover { border-color: rgba(245,197,66,0.30); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .stat-lbl { font-size: 9.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin-bottom: 7px; }
+    .stat-val { font-size: 21px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.5px; }
+    .stat-sub { font-size: 10px; color: var(--dim); margin-top: 6px; display: flex; align-items: center; gap: 5px; }
+    .badge { display: inline-block; font-size: 9px; padding: 3px 8px; border-radius: 5px; font-weight: 700; letter-spacing: 0.3px; }
     .badge.r { background: var(--red-dim); color: var(--red); }
     .badge.g { background: var(--green-dim); color: var(--green); }
     .badge.y { background: var(--gold-dim); color: var(--gold); }
 
     /* ── CHART AREA ── */
-    .chart-wrap { background: var(--card); border: 1px solid var(--border); border-top: none; border-radius: 0 0 0 0; padding: 0; }
-    .chart-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px; }
+    .chart-wrap { background: var(--card); border: 1px solid var(--border); border-top: none; padding: 0; }
+    .chart-box { background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%); border: 1px solid var(--border); border-radius: 13px; padding: 10px; box-shadow: var(--shadow-soft); transition: border-color 0.2s; }
+    .chart-box:hover { border-color: rgba(245,197,66,0.20); }
 
     /* ── SECTION DIVIDER ── */
-    .section-head { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 1.2px; margin: 8px 0 12px 0; display: flex; align-items: center; gap: 8px; }
-    .section-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-head { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 1.4px; margin: 10px 0 14px 0; display: flex; align-items: center; gap: 10px; }
+    .section-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
     /* ── CHAT UI ── */
     [data-testid="stChatMessage"] { background-color: var(--card) !important; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; padding: 14px !important; }
@@ -253,7 +274,7 @@ with st.sidebar:
             <div class="logo">
                 <div class="logo-mark">⛏</div>
                 <div>
-                    <div class="logo-name">MarketMiner</div>
+                    <div class="logo-name">Market<span>Miner</span></div>
                     <div class="logo-sub">Commodity Intelligence Platform</div>
                 </div>
             </div>
@@ -429,25 +450,29 @@ def render_live_main():
     if not df.empty:
         fig = go.Figure(data=[go.Candlestick(
             x=df.index, open=df['Open'], high=df['High'], low=df['Low'], close=df['Close'],
-            increasing_line_color='#26a69a', decreasing_line_color='#ef5350'
+            increasing_line_color='#2dd4a7', decreasing_line_color='#f0556d',
+            increasing_fillcolor='#2dd4a7', decreasing_fillcolor='#f0556d'
         )])
         ma20_line = df['Close'].rolling(window=20).mean()
-        fig.add_trace(go.Scatter(x=df.index, y=ma20_line, line=dict(color='#FFD700', width=1.5, dash='dot'), name='MA20'))
+        fig.add_trace(go.Scatter(x=df.index, y=ma20_line, line=dict(color='#f5c542', width=1.6, dash='dot'), name='MA20'))
 
         fig.update_layout(
-            template="plotly_dark", height=420, margin=dict(t=10, b=10, l=10, r=50),
-            paper_bgcolor='#141519', plot_bgcolor='#141519',
+            template="plotly_dark", height=430, margin=dict(t=14, b=12, l=12, r=52),
+            paper_bgcolor='#121318', plot_bgcolor='#121318',
+            font=dict(family='Inter, sans-serif'),
             xaxis=dict(
                 showgrid=False,
                 rangeslider_visible=False,
                 rangebreaks=[dict(bounds=["sat", "mon"])],
-                color='#6b7280'
+                color='#717784'
             ),
-            yaxis=dict(showgrid=True, gridcolor='#1c1d23', side="right", color='#6b7280'),
+            yaxis=dict(showgrid=True, gridcolor='#1b1d25', side="right", color='#717784'),
             showlegend=True,
-            legend=dict(x=0.01, y=0.99, bgcolor='rgba(0,0,0,0)', font=dict(color='#6b7280', size=10))
+            legend=dict(x=0.01, y=0.99, bgcolor='rgba(0,0,0,0)', font=dict(color='#717784', size=10))
         )
+        st.markdown("<div class='chart-wrap' style='border-radius:0 0 14px 14px;padding:8px;box-shadow:var(--shadow-soft);'>", unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+        st.markdown("</div>", unsafe_allow_html=True)
 
     # 4. Summary & Perfectly Aligned Stats Grid
     trend = "bullish uptrend" if pct >= 0 else "bearish downtrend"
@@ -511,16 +536,16 @@ def render_live_main():
     # 5. Bottom 3 Analytical Charts
     st.markdown("<div class='section-head' style='margin-top:24px;'>Market Analytics &amp; Models</div>", unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    chart_layout = dict(template="plotly_dark", height=250, margin=dict(t=35, b=15, l=10, r=10), paper_bgcolor='#141519', plot_bgcolor='#141519', title_font=dict(size=12, color="#6b7280"), font=dict(color='#6b7280'))
+    chart_layout = dict(template="plotly_dark", height=250, margin=dict(t=38, b=15, l=10, r=10), paper_bgcolor='#121318', plot_bgcolor='#121318', title_font=dict(size=12, color="#9ca3af"), font=dict(color='#717784', family='Inter, sans-serif'))
 
     with c1:
         st.markdown("<div class='chart-box'>", unsafe_allow_html=True)
         assets = ['Metals', 'Energy', 'Agri', 'Equities', 'Crypto']
         perfs = [0.8, -0.4, 1.2, 0.5, 2.1] 
-        colors = ['#22c55e' if p > 0 else '#ef4444' for p in perfs]
+        colors = ['#2dd4a7' if p > 0 else '#f0556d' for p in perfs]
         fig_bar = go.Figure(data=[go.Bar(x=assets, y=perfs, marker_color=colors)])
         fig_bar.update_layout(**chart_layout, title="📊 Sector Performance Model")
-        fig_bar.update_yaxes(showgrid=True, gridcolor='#1c1d23')
+        fig_bar.update_yaxes(showgrid=True, gridcolor='#1b1d25')
         st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -528,7 +553,7 @@ def render_live_main():
         st.markdown("<div class='chart-box'>", unsafe_allow_html=True)
         labels = ['Equities', 'Bonds', 'Gold', 'Cash']
         values = [60, 20, 10, 10]
-        fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.5, marker=dict(colors=['#3b82f6', '#8b5cf6', '#FFD700', '#22c55e']))])
+        fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.55, marker=dict(colors=['#4f8cff', '#a855f7', '#f5c542', '#2dd4a7'], line=dict(color='#121318', width=2)))])
         fig_pie.update_layout(**chart_layout, title="🥧 Institutional Allocation", showlegend=False)
         fig_pie.update_traces(textposition='inside', textinfo='percent+label')
         st.plotly_chart(fig_pie, use_container_width=True, config={'displayModeBar': False})
@@ -539,10 +564,10 @@ def render_live_main():
         np.random.seed(42)
         x_val = np.random.normal(0.05, 0.02, 50)
         y_val = x_val * 0.7 + np.random.normal(0, 0.015, 50)
-        fig_scatter = go.Figure(data=go.Scatter(x=x_val, y=y_val, mode='markers', marker=dict(color='#3b82f6', size=7, opacity=0.8)))
+        fig_scatter = go.Figure(data=go.Scatter(x=x_val, y=y_val, mode='markers', marker=dict(color='#4f8cff', size=8, opacity=0.75, line=dict(color='#121318', width=1))))
         fig_scatter.update_layout(**chart_layout, title=f"📈 Alpha Correlation vs SPY", xaxis_title="S&P 500", yaxis_title=f"{sym}")
-        fig_scatter.update_xaxes(showgrid=True, gridcolor='#1c1d23')
-        fig_scatter.update_yaxes(showgrid=True, gridcolor='#1c1d23')
+        fig_scatter.update_xaxes(showgrid=True, gridcolor='#1b1d25')
+        fig_scatter.update_yaxes(showgrid=True, gridcolor='#1b1d25')
         st.plotly_chart(fig_scatter, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -555,16 +580,17 @@ with st.sidebar:
 render_live_main()
 
 # Market Miner AI Chatbot
-st.markdown("<hr style='border-color:var(--border); margin: 2rem 0 1rem 0;'>", unsafe_allow_html=True)
-st.markdown(f"<div style='display:flex;align-items:center;gap:12px;margin-bottom:4px;'><div style='width:36px;height:36px;background:var(--gold);border-radius:50%;display:grid;place-items:center;font-size:17px;flex-shrink:0;'>🤖</div><div><div style='font-size:15px;font-weight:800;color:var(--gold);letter-spacing:-0.3px;'>MarketMiner AI</div><div style='font-size:10.5px;color:var(--dim);margin-top:2px;'>Commodity Intelligence Assistant · Powered by Gemini</div></div></div>", unsafe_allow_html=True)
+st.markdown("<hr style='border:none;border-top:1px solid var(--border); margin: 2.2rem 0 1.2rem 0;'>", unsafe_allow_html=True)
+st.markdown(f"<div style='display:flex;align-items:center;gap:13px;margin-bottom:6px;'><div style='width:38px;height:38px;background:linear-gradient(135deg,#FFD700,#f5c542);border-radius:11px;display:grid;place-items:center;font-size:18px;flex-shrink:0;box-shadow:0 2px 10px rgba(245,197,66,0.25);'>🤖</div><div><div style='font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;'>MarketMiner <span style=\"color:var(--gold);\">AI</span></div><div style='font-size:10.5px;color:var(--dim);margin-top:2px;'>Commodity Intelligence Assistant · Powered by Gemini</div></div></div>", unsafe_allow_html=True)
 
 # Chat Styling
 st.markdown("""
 <style>
-[data-testid="stChatMessage"] { background-color: var(--card) !important; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; padding: 15px !important;}
-[data-testid="chatAvatarIcon-user"] { background-color: var(--card2) !important; color: var(--text) !important; }
-[data-testid="chatAvatarIcon-assistant"] { background-color: var(--gold) !important; color: #000 !important; }
-[data-testid="stChatInput"] { background-color: var(--card) !important; border-color: var(--border) !important; }
+[data-testid="stChatMessage"] { background-color: var(--card) !important; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 16px !important; box-shadow: var(--shadow-soft); }
+[data-testid="chatAvatarIcon-user"] { background-color: var(--card3) !important; color: var(--text) !important; }
+[data-testid="chatAvatarIcon-assistant"] { background: linear-gradient(135deg,#FFD700,#f5c542) !important; color: #000 !important; }
+[data-testid="stChatInput"] { background-color: var(--card) !important; border-color: var(--border) !important; border-radius: 12px !important; }
+[data-testid="stChatInput"]:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold) !important; }
 </style>
 """, unsafe_allow_html=True)
 
