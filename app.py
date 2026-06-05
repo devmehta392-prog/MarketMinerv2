@@ -16,190 +16,217 @@ if "target" not in st.session_state:
 
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
     :root {
-        --bg: #08090c;
-        --card: #121318;
-        --card2: #181a20;
-        --card3: #20222a;
-        --border: #23252f;
-        --border-soft: #1b1d25;
-        --gold: #f5c542;
-        --gold-bright: #FFD700;
-        --gold-dim: rgba(245,197,66,0.10);
-        --text: #f4f5f7;
-        --dim: #717784;
+        --bg: #07080b;
+        --bg2: #0a0c10;
+        --card: #101218;
+        --card2: #151820;
+        --card3: #1c2029;
+        --border: #20242e;
+        --border-soft: #181922;
+        --hair: rgba(255,255,255,0.06);
+        --gold: #d4af6a;
+        --gold-bright: #e8c986;
+        --gold-deep: #b8945a;
+        --gold-dim: rgba(212,175,106,0.10);
+        --text: #eef0f4;
+        --text2: #c4c8d0;
+        --dim: #6b7280;
         --muted: #3a3f4b;
-        --green: #2dd4a7;
-        --green-dim: rgba(45,212,167,0.12);
-        --red: #f0556d;
-        --red-dim: rgba(240,85,109,0.12);
-        --blue: #4f8cff;
-        --teal: #14b8a6;
-        --shadow: 0 4px 24px rgba(0,0,0,0.40);
-        --shadow-soft: 0 2px 12px rgba(0,0,0,0.25);
+        --green: #34d399;
+        --green-dim: rgba(52,211,153,0.12);
+        --red: #fb6f84;
+        --red-dim: rgba(251,111,132,0.12);
+        --blue: #5b9dff;
+        --violet: #a78bfa;
+        --shadow: 0 8px 40px rgba(0,0,0,0.55);
+        --shadow-soft: 0 4px 20px rgba(0,0,0,0.35);
+        --glow-gold: 0 0 32px rgba(212,175,106,0.18);
     }
 
-    /* Header */
-    header[data-testid="stHeader"] { background-color: transparent !important; }
-    .block-container { padding: 2.4rem 1.6rem 1rem 1.6rem !important; max-width: 100% !important; }
-    [data-testid="stSidebarContent"] { padding: 0 !important; background-color: var(--card) !important; border-right: 1px solid var(--border-soft); }
+    /* ── BASE / ATMOSPHERE ── */
+    header[data-testid="stHeader"] { background-color: transparent !important; height: 0 !important; }
+    .block-container { padding: 1.8rem 2rem 1rem 2rem !important; max-width: 100% !important; }
+    [data-testid="stSidebarContent"] { padding: 0 !important; background: var(--card) !important; border-right: 1px solid var(--hair); }
+    [data-testid="stSidebar"] { background: var(--card) !important; }
+
     html, body, [data-testid="stAppViewContainer"] {
         background:
-            radial-gradient(1200px 600px at 80% -10%, rgba(79,140,255,0.04), transparent 60%),
-            radial-gradient(1000px 500px at 0% 0%, rgba(245,197,66,0.03), transparent 55%),
-            var(--bg);
+            radial-gradient(1400px 700px at 85% -15%, rgba(91,157,255,0.05), transparent 55%),
+            radial-gradient(1100px 600px at -5% 5%, rgba(212,175,106,0.045), transparent 50%),
+            linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
         color: var(--text);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Manrope', sans-serif;
         -webkit-font-smoothing: antialiased;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.012em;
+    }
+    /* subtle film grain overlay for depth */
+    [data-testid="stAppViewContainer"]::before {
+        content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
+    .mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "tnum"; }
+
     /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: #2a2b35; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #262a35; border-radius: 6px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
 
     /* ── TICKER BAR ── */
-    .ticker-bar { background: #080909; border-bottom: 1px solid var(--border); padding: 7px 0; overflow: hidden; white-space: nowrap; margin: -2rem -1.5rem 18px -1.5rem; }
-    .ticker-track { display: inline-flex; animation: scroll 40s linear infinite; }
+    .ticker-bar { background: linear-gradient(180deg, #0b0d12, #070809); border-bottom: 1px solid var(--hair); padding: 9px 0; overflow: hidden; white-space: nowrap; margin: -1.8rem -2rem 20px -2rem; position: relative; }
+    .ticker-bar::after { content: ""; position: absolute; top: 0; right: 0; width: 80px; height: 100%; background: linear-gradient(90deg, transparent, #070809); pointer-events: none; }
+    .ticker-track { display: inline-flex; animation: scroll 50s linear infinite; }
     .ticker-track:hover { animation-play-state: paused; }
-    .t-item { display: inline-flex; align-items: center; gap: 6px; padding: 0 22px; font-size: 12px; border-right: 1px solid #1a1b22; }
-    .t-item .t-name { color: var(--dim); font-weight: 500; }
-    .t-item .t-price { font-weight: 700; color: #fff; }
+    .t-item { display: inline-flex; align-items: center; gap: 7px; padding: 0 24px; font-size: 12px; border-right: 1px solid var(--hair); }
+    .t-item .t-name { color: var(--dim); font-weight: 600; }
+    .t-item .t-price { font-weight: 600; color: #fff; font-family: 'JetBrains Mono', monospace; }
+    .t-item .t-chg { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
     .t-item .up { color: var(--green); }
     .t-item .dn { color: var(--red); }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ── SIDEBAR BRANDING ── */
-    .sb-top { padding: 20px 18px 18px 18px; border-bottom: 1px solid var(--border-soft); background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%); }
-    .logo { display: flex; align-items: center; gap: 12px; }
-    .logo-mark { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%); border-radius: 10px; display: grid; place-items: center; font-size: 19px; color: #1a1500; font-weight: bold; box-shadow: 0 2px 10px rgba(245,197,66,0.25); }
-    .logo-name { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; line-height: 1.1; }
-    .logo-name span { color: var(--gold); }
-    .logo-sub { font-size: 10px; color: var(--dim); margin-top: 2px; letter-spacing: 0.2px; }
-    .sb-label { padding: 16px 18px 7px; font-size: 9.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.4px; }
+    .sb-top { padding: 22px 20px 20px 20px; border-bottom: 1px solid var(--hair); background: linear-gradient(180deg, rgba(212,175,106,0.04), transparent); position: relative; }
+    .sb-top::after { content: ""; position: absolute; left: 20px; right: 20px; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); }
+    .logo { display: flex; align-items: center; gap: 13px; }
+    .logo-mark { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)); border-radius: 12px; display: grid; place-items: center; font-size: 21px; color: #1a1300; font-weight: 800; box-shadow: var(--glow-gold), inset 0 1px 0 rgba(255,255,255,0.3); }
+    .logo-name { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.6px; line-height: 1.05; }
+    .logo-name span { background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .logo-sub { font-size: 9.5px; color: var(--dim); margin-top: 3px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+    .sb-label { padding: 18px 20px 8px; font-size: 9px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.8px; }
 
     /* ── SIDEBAR ASSET ROWS ── */
     .sb-asset-row {
-        display: flex; align-items: center; padding: 11px 16px; cursor: pointer;
-        border-left: 3px solid transparent; transition: all 0.18s cubic-bezier(0.4,0,0.2,1); gap: 10px;
-        margin: 1px 8px; border-radius: 9px;
+        display: flex; align-items: center; padding: 11px 14px; cursor: pointer;
+        border: 1px solid transparent; transition: all 0.2s cubic-bezier(0.4,0,0.2,1); gap: 11px;
+        margin: 2px 10px; border-radius: 11px; position: relative;
     }
-    .sb-asset-row:hover { background: var(--card2); }
-    .sb-asset-row.active { background: linear-gradient(90deg, rgba(245,197,66,0.10), rgba(245,197,66,0.02)); border-left-color: var(--gold); box-shadow: inset 0 0 0 1px rgba(245,197,66,0.10); }
+    .sb-asset-row:hover { background: var(--card2); border-color: var(--hair); }
+    .sb-asset-row.active {
+        background: linear-gradient(100deg, rgba(212,175,106,0.12), rgba(212,175,106,0.02));
+        border-color: rgba(212,175,106,0.30);
+        box-shadow: inset 0 0 0 1px rgba(212,175,106,0.08), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .sb-asset-row.active::before { content: ""; position: absolute; left: -1px; top: 22%; bottom: 22%; width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep)); }
     .sb-asset-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
     .sb-asset-info { flex: 1; min-width: 0; }
-    .sb-asset-name { font-size: 13px; font-weight: 600; color: var(--text); }
-    .sb-asset-ticker { font-size: 10px; color: var(--dim); letter-spacing: 0.3px; }
+    .sb-asset-name { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+    .sb-asset-ticker { font-size: 9.5px; color: var(--dim); letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
     .sb-asset-right { text-align: right; flex-shrink: 0; }
-    .sb-asset-price { font-size: 13px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
-    .sb-asset-chg { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .sb-asset-price { font-size: 12.5px; font-weight: 600; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    .sb-asset-chg { font-size: 10.5px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
     .sb-asset-chg.up { color: var(--green); }
     .sb-asset-chg.dn { color: var(--red); }
+    .sb-spark { width: 58px; height: 30px; flex-shrink: 0; opacity: 0.85; }
 
-    /* ── SIDEBAR SPARKLINE WRAPPER ── */
-    .sb-spark { width: 60px; height: 30px; flex-shrink: 0; }
-
-    /* ── SIDEBAR BUTTONS ── */
+    /* ── SIDEBAR BUTTONS (overlay click targets) ── */
     div[data-testid="stButton"] > button {
-        width: 100%;
+        width: calc(100% - 20px) !important;
         background: transparent !important;
-        border: 1px solid var(--border) !important;
+        border: 1px solid var(--hair) !important;
         color: var(--dim) !important;
-        font-size: 10.5px !important;
-        font-weight: 600 !important;
-        letter-spacing: 0.3px !important;
-        padding: 5px 8px !important;
-        border-radius: 7px !important;
-        margin: -2px 8px 6px 8px !important;
-        width: calc(100% - 16px) !important;
-        transition: all 0.18s cubic-bezier(0.4,0,0.2,1);
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 9.5px !important; font-weight: 600 !important; letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        padding: 6px 8px !important; border-radius: 8px !important;
+        margin: 0 10px 7px 10px !important;
+        transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
     }
     div[data-testid="stButton"] > button:hover {
-        border-color: var(--gold) !important;
-        color: var(--gold) !important;
-        background: var(--gold-dim) !important;
+        border-color: var(--gold) !important; color: var(--gold-bright) !important;
+        background: var(--gold-dim) !important; box-shadow: 0 0 16px rgba(212,175,106,0.12);
     }
     div[data-testid="stButton"] > button[kind="primary"] {
-        background: linear-gradient(135deg, rgba(245,197,66,0.18), rgba(245,197,66,0.06)) !important;
-        border-color: var(--gold) !important;
-        color: var(--gold) !important;
+        background: linear-gradient(135deg, rgba(212,175,106,0.20), rgba(212,175,106,0.05)) !important;
+        border-color: rgba(212,175,106,0.45) !important; color: var(--gold-bright) !important;
     }
 
-    /* ── MAIN HEADER BAR ── */
+    /* ── MAIN HEADER BAR (glass) ── */
     .ch-head {
-        padding: 16px 22px; border: 1px solid var(--border); border-radius: 14px 14px 0 0;
-        display: flex; align-items: center; gap: 14px;
-        background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%); margin-bottom: 0px;
-        flex-wrap: wrap; box-shadow: var(--shadow-soft);
+        padding: 18px 24px; border: 1px solid var(--hair); border-radius: 16px 16px 0 0;
+        display: flex; align-items: center; gap: 15px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+        backdrop-filter: blur(20px); margin-bottom: 0; flex-wrap: wrap;
+        box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
     }
-    .ch-icon { font-size: 28px; }
-    .ch-name { font-size: 21px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
-    .ch-ticker { font-size: 11px; color: var(--dim); background: var(--card3); padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border); font-weight: 600; letter-spacing: 0.3px; }
-    .ch-price { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
-    .ch-chg { font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 7px; font-variant-numeric: tabular-nums; }
+    .ch-head::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,106,0.4), transparent); }
+    .ch-icon { font-size: 30px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .ch-name { font-size: 23px; font-weight: 800; color: var(--text); letter-spacing: -0.8px; }
+    .ch-ticker { font-size: 10.5px; color: var(--gold); background: var(--gold-dim); padding: 4px 10px; border-radius: 7px; border: 1px solid rgba(212,175,106,0.25); font-weight: 600; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
+    .ch-price { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace; letter-spacing: -1.5px; }
+    .ch-chg { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; }
     .ch-chg.up { color: var(--green); background: var(--green-dim); }
     .ch-chg.dn { color: var(--red); background: var(--red-dim); }
-    .demo-badge { background: var(--gold-dim); color: var(--gold); padding: 4px 10px; border-radius: 6px; font-size: 9.5px; font-weight: 700; border: 1px solid rgba(245,197,66,.25); letter-spacing: 0.5px; }
+    .demo-badge { background: var(--green-dim); color: var(--green); padding: 5px 11px; border-radius: 7px; font-size: 9.5px; font-weight: 700; border: 1px solid rgba(52,211,153,0.25); letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px; }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(52,211,153,0.7); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); } 70% { box-shadow: 0 0 0 7px rgba(52,211,153,0); } 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); } }
 
-    /* ── OHLC BAR (below header) ── */
+    /* ── OHLC BAR ── */
     .ohlc-bar {
-        background: var(--card); border: 1px solid var(--border); border-top: none;
-        display: flex; align-items: center; padding: 9px 22px; gap: 0; flex-wrap: wrap;
+        background: rgba(255,255,255,0.012); border: 1px solid var(--hair); border-top: none;
+        display: flex; align-items: center; padding: 11px 24px; gap: 0; flex-wrap: wrap; backdrop-filter: blur(10px);
     }
-    .ohlc-item { display: flex; align-items: center; gap: 6px; padding: 0 18px 0 0; border-right: 1px solid var(--border-soft); margin-right: 18px; }
+    .ohlc-item { display: flex; align-items: center; gap: 7px; padding: 0 20px 0 0; border-right: 1px solid var(--hair); margin-right: 20px; }
     .ohlc-item:last-child { border-right: none; margin-right: 0; }
-    .ohlc-lbl { font-size: 9.5px; color: var(--dim); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
-    .ohlc-val { font-size: 12px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+    .ohlc-lbl { font-size: 9px; color: var(--dim); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .ohlc-val { font-size: 12px; font-weight: 600; color: var(--text); font-family: 'JetBrains Mono', monospace; }
     .ohlc-val.hi { color: var(--green); }
     .ohlc-val.lo { color: var(--red); }
 
     /* ── SUMMARY STRIP ── */
     .summary {
-        background: linear-gradient(90deg, rgba(245,197,66,0.06) 0%, transparent 70%);
-        border: 1px solid var(--border); border-top: none; border-radius: 0 0 14px 14px;
-        padding: 12px 22px; font-size: 12.5px; line-height: 1.75; color: #9ca3af; margin-bottom: 0;
+        background: linear-gradient(100deg, rgba(212,175,106,0.05), transparent 65%);
+        border: 1px solid var(--hair); border-top: none; border-radius: 0 0 16px 16px;
+        padding: 13px 24px; font-size: 12.5px; line-height: 1.8; color: var(--text2); margin-bottom: 0;
         box-shadow: var(--shadow-soft);
     }
-    .summary strong { color: var(--text); }
+    .summary strong { color: var(--text); font-weight: 700; }
+    .summary .mono { color: var(--text); }
 
     /* ── STATS GRID ── */
-    .stats {
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 22px 0;
-    }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 20px 0 24px 0; }
     .stat {
-        background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%);
-        padding: 17px 19px; border-radius: 13px; border: 1px solid var(--border);
-        display: flex; flex-direction: column; gap: 2px; transition: all 0.22s cubic-bezier(0.4,0,0.2,1); cursor: default;
-        box-shadow: var(--shadow-soft);
+        background: linear-gradient(160deg, rgba(255,255,255,0.025), rgba(255,255,255,0.004));
+        padding: 18px 20px; border-radius: 15px; border: 1px solid var(--hair);
+        display: flex; flex-direction: column; gap: 2px; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); cursor: default;
+        box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
     }
-    .stat:hover { border-color: rgba(245,197,66,0.30); transform: translateY(-3px); box-shadow: var(--shadow); }
-    .stat-lbl { font-size: 9.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin-bottom: 7px; }
-    .stat-val { font-size: 21px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.5px; }
-    .stat-sub { font-size: 10px; color: var(--dim); margin-top: 6px; display: flex; align-items: center; gap: 5px; }
-    .badge { display: inline-block; font-size: 9px; padding: 3px 8px; border-radius: 5px; font-weight: 700; letter-spacing: 0.3px; }
+    .stat::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--hair), transparent); }
+    .stat:hover { border-color: rgba(212,175,106,0.30); transform: translateY(-4px); box-shadow: var(--shadow), var(--glow-gold); }
+    .stat-lbl { font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.4px; font-weight: 700; margin-bottom: 9px; }
+    .stat-val { font-size: 22px; font-weight: 700; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.8px; }
+    .stat-sub { font-size: 10px; color: var(--dim); margin-top: 7px; display: flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', monospace; }
+    .badge { display: inline-block; font-size: 8.5px; padding: 3px 8px; border-radius: 5px; font-weight: 700; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
     .badge.r { background: var(--red-dim); color: var(--red); }
     .badge.g { background: var(--green-dim); color: var(--green); }
     .badge.y { background: var(--gold-dim); color: var(--gold); }
 
     /* ── CHART AREA ── */
-    .chart-wrap { background: var(--card); border: 1px solid var(--border); border-top: none; padding: 0; }
-    .chart-box { background: linear-gradient(180deg, var(--card2) 0%, var(--card) 100%); border: 1px solid var(--border); border-radius: 13px; padding: 10px; box-shadow: var(--shadow-soft); transition: border-color 0.2s; }
-    .chart-box:hover { border-color: rgba(245,197,66,0.20); }
+    .chart-wrap { background: transparent; padding: 0; }
+    .chart-box {
+        background: linear-gradient(160deg, rgba(255,255,255,0.022), rgba(255,255,255,0.004));
+        border: 1px solid var(--hair); border-radius: 15px; padding: 12px; box-shadow: var(--shadow-soft);
+        transition: border-color 0.25s; position: relative; overflow: hidden;
+    }
+    .chart-box::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--hair), transparent); }
+    .chart-box:hover { border-color: rgba(212,175,106,0.22); }
 
     /* ── SECTION DIVIDER ── */
-    .section-head { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 1.4px; margin: 10px 0 14px 0; display: flex; align-items: center; gap: 10px; }
-    .section-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+    .section-head { font-size: 10.5px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 12px 0 16px 0; display: flex; align-items: center; gap: 12px; }
+    .section-head::before { content: ""; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold); }
+    .section-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--hair), transparent); }
 
     /* ── CHAT UI ── */
-    [data-testid="stChatMessage"] { background-color: var(--card) !important; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; padding: 14px !important; }
-    [data-testid="chatAvatarIcon-user"] { background-color: var(--card3) !important; color: var(--text) !important; }
-    [data-testid="chatAvatarIcon-assistant"] { background-color: var(--gold) !important; color: #000 !important; }
-    [data-testid="stChatInput"] { background-color: var(--card) !important; border-color: var(--border) !important; }
-    [data-testid="stChatInput"]:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold) !important; }
+    [data-testid="stChatMessage"] { background: linear-gradient(160deg, rgba(255,255,255,0.022), rgba(255,255,255,0.004)) !important; border: 1px solid var(--hair); border-radius: 14px; margin-bottom: 11px; padding: 16px !important; box-shadow: var(--shadow-soft); }
+    [data-testid="chatAvatarIcon-user"] { background: var(--card3) !important; color: var(--text) !important; }
+    [data-testid="chatAvatarIcon-assistant"] { background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep)) !important; color: #000 !important; }
+    [data-testid="stChatInput"] { background: var(--card) !important; border-color: var(--hair) !important; border-radius: 14px !important; }
+    [data-testid="stChatInput"]:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold), var(--glow-gold) !important; }
+    [data-testid="stChatInput"] textarea { font-family: 'Manrope', sans-serif !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -429,7 +456,7 @@ def render_live_main():
         <span class="ch-icon">{icon}</span>
         <span class="ch-name">{name}</span>
         <span class="ch-ticker">{sym}</span>
-        <span class="demo-badge">LIVE INTEL</span>
+        <span class="demo-badge"><span class="pulse-dot"></span>LIVE</span>
         <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
             <div class="ch-price" style="color:{color_hex};">${curr:,.2f}</div>
             <div class="ch-chg {up_cls}">{arrow}{curr-o:,.2f} ({arrow}{pct:.2f}%)</div>
@@ -448,29 +475,39 @@ def render_live_main():
 
     # 3. Dynamic Candlestick Chart (with Rangebreaks to hide weekends)
     if not df.empty:
-        fig = go.Figure(data=[go.Candlestick(
+        # Soft area glow beneath the close price for depth (visual only)
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df.index, y=df['Close'], mode='lines',
+            line=dict(color='rgba(212,175,106,0)', width=0),
+            fill='tozeroy', fillcolor='rgba(212,175,106,0.05)',
+            hoverinfo='skip', showlegend=False
+        ))
+        fig.add_trace(go.Candlestick(
             x=df.index, open=df['Open'], high=df['High'], low=df['Low'], close=df['Close'],
-            increasing_line_color='#2dd4a7', decreasing_line_color='#f0556d',
-            increasing_fillcolor='#2dd4a7', decreasing_fillcolor='#f0556d'
-        )])
+            increasing_line_color='#34d399', decreasing_line_color='#fb6f84',
+            increasing_fillcolor='rgba(52,211,153,0.85)', decreasing_fillcolor='rgba(251,111,132,0.85)',
+            line=dict(width=1), name='Price'
+        ))
         ma20_line = df['Close'].rolling(window=20).mean()
-        fig.add_trace(go.Scatter(x=df.index, y=ma20_line, line=dict(color='#f5c542', width=1.6, dash='dot'), name='MA20'))
+        fig.add_trace(go.Scatter(x=df.index, y=ma20_line, line=dict(color='#d4af6a', width=1.6, dash='dot'), name='MA 20'))
 
         fig.update_layout(
-            template="plotly_dark", height=430, margin=dict(t=14, b=12, l=12, r=52),
-            paper_bgcolor='#121318', plot_bgcolor='#121318',
-            font=dict(family='Inter, sans-serif'),
+            template="plotly_dark", height=440, margin=dict(t=16, b=14, l=14, r=56),
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(family='JetBrains Mono, monospace', size=10, color='#6b7280'),
             xaxis=dict(
-                showgrid=False,
-                rangeslider_visible=False,
+                showgrid=False, rangeslider_visible=False,
                 rangebreaks=[dict(bounds=["sat", "mon"])],
-                color='#717784'
+                color='#6b7280', showspikes=True, spikecolor='rgba(212,175,106,0.3)',
+                spikethickness=1, spikedash='dot', spikemode='across'
             ),
-            yaxis=dict(showgrid=True, gridcolor='#1b1d25', side="right", color='#717784'),
-            showlegend=True,
-            legend=dict(x=0.01, y=0.99, bgcolor='rgba(0,0,0,0)', font=dict(color='#717784', size=10))
+            yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.04)', side="right",
+                       color='#6b7280', zeroline=False),
+            showlegend=True, hovermode='x unified',
+            legend=dict(x=0.01, y=0.99, bgcolor='rgba(0,0,0,0)', font=dict(color='#6b7280', size=10))
         )
-        st.markdown("<div class='chart-wrap' style='border-radius:0 0 14px 14px;padding:8px;box-shadow:var(--shadow-soft);'>", unsafe_allow_html=True)
+        st.markdown("<div class='chart-box' style='border-radius:0 0 16px 16px;border-top:none;'>", unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -484,7 +521,7 @@ def render_live_main():
 
     st.markdown(f"""
     <div class="summary">
-        ✨ <strong>AI Oracle:</strong> <strong>{name}</strong> is in a <strong>{trend}</strong>. RSI(14) at <strong style="color:{rsi_col};">{rsi_val:.1f}</strong> is <strong style="color:{rsi_col};">{rsi_stat}</strong>. Price is <strong>{'above' if curr > ma_val else 'below'}</strong> the 20-period moving average. IQ Score <strong>{72 if rsi_val > 55 else (35 if rsi_val < 45 else 56)}/100</strong> — <strong>{'moderately bullish' if pct >= 0 else 'moderately bearish'} bias</strong>. Current: <strong>${curr:,.2f}</strong>
+        <strong style="color:var(--gold);">◆ AI ORACLE</strong> &nbsp;<strong>{name}</strong> is in a <strong>{trend}</strong>. RSI(14) at <strong class="mono" style="color:{rsi_col};">{rsi_val:.1f}</strong> is <strong style="color:{rsi_col};">{rsi_stat}</strong>. Price is <strong>{'above' if curr > ma_val else 'below'}</strong> the 20-period moving average. IQ Score <strong class="mono">{72 if rsi_val > 55 else (35 if rsi_val < 45 else 56)}/100</strong> — <strong>{'moderately bullish' if pct >= 0 else 'moderately bearish'} bias</strong>. Current: <strong class="mono">${curr:,.2f}</strong>
     </div>
     """, unsafe_allow_html=True)
 
@@ -536,16 +573,16 @@ def render_live_main():
     # 5. Bottom 3 Analytical Charts
     st.markdown("<div class='section-head' style='margin-top:24px;'>Market Analytics &amp; Models</div>", unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    chart_layout = dict(template="plotly_dark", height=250, margin=dict(t=38, b=15, l=10, r=10), paper_bgcolor='#121318', plot_bgcolor='#121318', title_font=dict(size=12, color="#9ca3af"), font=dict(color='#717784', family='Inter, sans-serif'))
+    chart_layout = dict(template="plotly_dark", height=250, margin=dict(t=40, b=15, l=10, r=10), paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', title_font=dict(size=12, color="#c4c8d0", family='Manrope, sans-serif'), font=dict(color='#6b7280', family='JetBrains Mono, monospace', size=10))
 
     with c1:
         st.markdown("<div class='chart-box'>", unsafe_allow_html=True)
         assets = ['Metals', 'Energy', 'Agri', 'Equities', 'Crypto']
         perfs = [0.8, -0.4, 1.2, 0.5, 2.1] 
-        colors = ['#2dd4a7' if p > 0 else '#f0556d' for p in perfs]
-        fig_bar = go.Figure(data=[go.Bar(x=assets, y=perfs, marker_color=colors)])
-        fig_bar.update_layout(**chart_layout, title="📊 Sector Performance Model")
-        fig_bar.update_yaxes(showgrid=True, gridcolor='#1b1d25')
+        colors = ['#34d399' if p > 0 else '#fb6f84' for p in perfs]
+        fig_bar = go.Figure(data=[go.Bar(x=assets, y=perfs, marker_color=colors, marker_line_width=0)])
+        fig_bar.update_layout(**chart_layout, title="Sector Performance Model")
+        fig_bar.update_yaxes(showgrid=True, gridcolor='rgba(255,255,255,0.04)', zeroline=False)
         st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -553,9 +590,9 @@ def render_live_main():
         st.markdown("<div class='chart-box'>", unsafe_allow_html=True)
         labels = ['Equities', 'Bonds', 'Gold', 'Cash']
         values = [60, 20, 10, 10]
-        fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.55, marker=dict(colors=['#4f8cff', '#a855f7', '#f5c542', '#2dd4a7'], line=dict(color='#121318', width=2)))])
-        fig_pie.update_layout(**chart_layout, title="🥧 Institutional Allocation", showlegend=False)
-        fig_pie.update_traces(textposition='inside', textinfo='percent+label')
+        fig_pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.62, marker=dict(colors=['#5b9dff', '#a78bfa', '#d4af6a', '#34d399'], line=dict(color='#07080b', width=2)))])
+        fig_pie.update_layout(**chart_layout, title="Institutional Allocation", showlegend=False)
+        fig_pie.update_traces(textposition='inside', textinfo='percent+label', textfont=dict(size=10, family='JetBrains Mono, monospace'))
         st.plotly_chart(fig_pie, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -564,10 +601,10 @@ def render_live_main():
         np.random.seed(42)
         x_val = np.random.normal(0.05, 0.02, 50)
         y_val = x_val * 0.7 + np.random.normal(0, 0.015, 50)
-        fig_scatter = go.Figure(data=go.Scatter(x=x_val, y=y_val, mode='markers', marker=dict(color='#4f8cff', size=8, opacity=0.75, line=dict(color='#121318', width=1))))
-        fig_scatter.update_layout(**chart_layout, title=f"📈 Alpha Correlation vs SPY", xaxis_title="S&P 500", yaxis_title=f"{sym}")
-        fig_scatter.update_xaxes(showgrid=True, gridcolor='#1b1d25')
-        fig_scatter.update_yaxes(showgrid=True, gridcolor='#1b1d25')
+        fig_scatter = go.Figure(data=go.Scatter(x=x_val, y=y_val, mode='markers', marker=dict(color='#5b9dff', size=8, opacity=0.7, line=dict(color='#07080b', width=1))))
+        fig_scatter.update_layout(**chart_layout, title="Alpha Correlation vs SPY", xaxis_title="S&P 500", yaxis_title=f"{sym}")
+        fig_scatter.update_xaxes(showgrid=True, gridcolor='rgba(255,255,255,0.04)', zeroline=False)
+        fig_scatter.update_yaxes(showgrid=True, gridcolor='rgba(255,255,255,0.04)', zeroline=False)
         st.plotly_chart(fig_scatter, use_container_width=True, config={'displayModeBar': False})
         st.markdown("</div>", unsafe_allow_html=True)
 
