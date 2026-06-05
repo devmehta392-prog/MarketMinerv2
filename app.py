@@ -604,4 +604,3 @@ if prompt := st.chat_input("Query the Oracle..."):
             except Exception as e:
                 st.error(f"Oracle Error: {e}")
 
-last code - until everything working fine
