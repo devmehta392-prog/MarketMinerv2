@@ -261,7 +261,6 @@ with st.sidebar:
     st.markdown("<div class='sb-label'>AI Access Key</div>", unsafe_allow_html=True)
     st.session_state.api_key = st.text_input("API Key", type="password", placeholder="Enter Gemini API Key...", label_visibility="collapsed")
 
-@st.fragment(run_every="10s")
 def render_live_sidebar():
     df_all = fetch_live_data()
     categories = ["Precious", "Energy", "Metals", "Agri", "Digital"]
@@ -361,7 +360,6 @@ def render_live_sidebar():
 # ==========================================
 # 4. MAIN DASHBOARD (Chart + Aligned Stats)
 # ==========================================
-@st.fragment(run_every="10s")
 def render_live_main():
     df_all = fetch_live_data()
     if df_all.empty:
